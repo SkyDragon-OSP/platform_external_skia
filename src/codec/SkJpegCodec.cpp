@@ -421,12 +421,7 @@ SkCodec::Result SkJpegCodec::onStartScanlineDecode(const SkImageInfo& dstInfo,
         return kInvalidConversion;
     }
 
-#ifdef DCT_IFAST_SUPPORTED
-    (fDecoderMgr->dinfo())->dct_method = JDCT_IFAST;
-#else
-    (fDecoderMgr->dinfo())->dct_method = JDCT_ISLOW;
-#endif
-// Now, given valid output dimensions, we can start the decompress
+    // Now, given valid output dimensions, we can start the decompress
     if (!jpeg_start_decompress(fDecoderMgr->dinfo())) {
         SkCodecPrintf("start decompress failed\n");
         return kInvalidInput;
